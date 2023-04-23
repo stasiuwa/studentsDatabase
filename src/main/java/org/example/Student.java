@@ -1,4 +1,6 @@
 package org.example;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,14 +26,20 @@ public class Student {
     }
     public Student(){}
     public void scan_data(){    //wczytanie studenta od użytkownika
-        System.out.println("Name:");
-        setName(validation(pattern_name));
+        System.out.println("\t\tINSERT STUDENT DATA");
+        try {
+            System.out.println("Index number:");
+            setIndex_number(Integer.parseInt(validation(pattern_num)));
 
-        System.out.println("Surname:");
-        setSurname(validation(pattern_name));
+            System.out.println("Name:");
+            setName(StringUtils.capitalize(validation(pattern_name)));
 
-        System.out.println("Index number:");
-        setIndex_number(Integer.parseInt(validation(pattern_num)));
+            System.out.println("Surname:");
+            setSurname(StringUtils.capitalize(validation(pattern_name)));
+
+        } catch (Exception e) {
+            System.out.println("student's data loading error");
+        }
     }
     public String validation(Pattern pattern){  //weryfikajca wprowadzanych danych
         String temp;
@@ -44,6 +52,18 @@ public class Student {
 
         return temp;
     }
+
+
+    @Override
+    public String toString() {
+
+        return "Student: \t " +
+                index_number + "\t" +
+                name + '\t' +
+                surname;
+
+    }
+
     public int getIndex_number() {
         return index_number;
     }
